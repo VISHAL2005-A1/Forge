@@ -599,7 +599,7 @@ if (!files["/App.tsx"] && !files["/App.jsx"]) {
     },
   });
 
-  const creditsRemaining = Math.max(0, dbUser.credits - 5);
+  const creditsRemaining = Math.max(0, dbUser.credits - 2);
   await db.user.update({
     where: { id: dbUser.id },
     data: { credits: creditsRemaining },

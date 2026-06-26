@@ -4,6 +4,7 @@
 
 
 
+import Image from "next/image";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useUser } from "@clerk/nextjs";
 import {
@@ -22,7 +23,6 @@ import { PricingModal } from "@/components/PricingModal";
 import type { Message, StatusStep } from "@/types/workspace";
 import { createClient } from "@supabase/supabase-js";
 import { BlueTitle } from "./reusable";
-import Image from "next/image";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -259,7 +259,7 @@ export function ChatPanel({
           {isGenerating && (
             <div className="flex items-start gap-2">
               <Image
-                src="/ai.png"
+                src="/my.png"
                 alt="Forge"
                 width={24}
                 height={24}

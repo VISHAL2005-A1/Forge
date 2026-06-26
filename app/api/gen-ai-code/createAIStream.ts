@@ -4,13 +4,12 @@
 import path from "path";
 import { aiRouter } from "@/lib/ai/router";
 import { AIMessage } from "@/lib/ai/types";
-import { jsonrepair } from "jsonrepair";
+
 import { db } from "@/lib/prisma";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import {
   validateResponse,
   parseJSON,
-  validateFiles,
   logError,
   getFriendlyMessage,
   getErrorFallbackFile,

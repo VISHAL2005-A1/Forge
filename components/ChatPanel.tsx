@@ -1,5 +1,5 @@
 "use client";
-import HowToUse from "./howToUse";
+
 
 
 
@@ -60,18 +60,18 @@ export function ChatPanel({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  
+
   const [input, setInput] = useState("");
   const [pendingImageUrl, setPendingImageUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  
+
   const hasAutoSubmittedRef = useRef(false);
   const noCredits = credits <= 0;
-  
+
   // The last message is the live-streaming assistant placeholder during improve
   const lastMsg = messages[messages.length - 1];
   const isStreamingAssistant = isImproving && lastMsg?.role === "assistant";
-  
+
   // Auto-resize textarea
   useEffect(() => {
     const el = textareaRef.current;
@@ -79,14 +79,14 @@ export function ChatPanel({
     el.style.height = "auto";
     el.style.height = Math.min(el.scrollHeight, 160) + "px";
   }, [input]);
-  
+
   // Auto-scroll on new messages or streaming updates
   useEffect(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
     el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, isGenerating, isImproving]);
-  
+
   useEffect(() => {
     if (!initialPrompt || hasAutoSubmittedRef.current || messages.length > 0)
       return;
@@ -94,7 +94,7 @@ export function ChatPanel({
     onGenerate(initialPrompt);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const handleSubmit = async () => {
     const trimmed = input.trim();
     if (!trimmed || isGenerating || isImproving || noCredits) return;
@@ -102,14 +102,14 @@ export function ChatPanel({
     setPendingImageUrl(null);
     await onGenerate(trimmed, pendingImageUrl ?? undefined);
   };
-  
+
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit();
     }
   };
-  
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !file.type.startsWith("image/")) return;
@@ -118,12 +118,12 @@ export function ChatPanel({
       const ext = file.name.split(".").pop();
       const path = `${userId}/${workspaceId ?? "new"}/${Date.now()}.${ext}`;
       const { error } = await supabase.storage
-      .from("workspace-images")
-      .upload(path, file, { upsert: true });
+        .from("workspace-images")
+        .upload(path, file, { upsert: true });
       if (error) throw error;
       const { data } = supabase.storage
-      .from("workspace-images")
-      .getPublicUrl(path);
+        .from("workspace-images")
+        .getPublicUrl(path);
       setPendingImageUrl(data.publicUrl);
     } catch {
       // silent
@@ -132,22 +132,22 @@ export function ChatPanel({
       if (fileRef.current) fileRef.current.value = "";
     }
   };
-  
+
   const canSubmit =
-  input.trim().length > 0 && !isGenerating && !isImproving && !noCredits;
-  
+    input.trim().length > 0 && !isGenerating && !isImproving && !noCredits;
+
   return (
     <div className="flex w-[320px] shrink-0 flex-col bg-[#0d0d0d]">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/6 px-2 py-3">
-        <BlueTitle>{appTitle}</BlueTitle>
+      <div className=" grid grid-cols-1 lg:grid-cols-3 gap-6 border-b border-white/6 px-2 py-3 ">
+        <div className=" lg:col-span-2  p-4 rounded  text-xl font-bold text-heading">{appTitle}</div>
         <PricingModal reason={noCredits ? "credits" : "upgrade"}>
           <span
             className={cn(
-              "rounded-full px-2 py-0.5 text-[11px] transition-colors",
+              
               noCredits
-              ? "bg-red-500/15 text-red-400/80 hover:bg-red-500/25"
-              : "bg-white/6 text-white/30 hover:bg-white/10 hover:text-white/50"
+                ? "bg-red-500/15 text-red-400/80 hover:bg-red-500/25"
+                : "bg-blue-500 text-sm font-medium px-2 py-1 rounded"
             )}
           >
             {noCredits
@@ -347,8 +347,8 @@ export function ChatPanel({
             isGenerating || isImproving
               ? "border-white/4"
               : noCredits
-              ? "border-white/4 opacity-60"
-              : "border-white/8 hover:border-white/12"
+                ? "border-white/4 opacity-60"
+                : "border-white/8 hover:border-white/12"
           )}
         >
           <textarea
@@ -361,10 +361,10 @@ export function ChatPanel({
               noCredits
                 ? "Upgrade to keep building…"
                 : isImproving
-                ? "Cline is improving your app…"
-                : isGenerating
-                ? "Generating…"
-                : "Ask AI to modify…"
+                  ? "Cline is improving your app…"
+                  : isGenerating
+                    ? "Generating…"
+                    : "Ask AI to modify…"
             }
             rows={1}
             className="w-full resize-none bg-transparent px-3.5 pb-2 pt-3 text-[13px] text-white/80 placeholder:text-white/20 focus:outline-none"

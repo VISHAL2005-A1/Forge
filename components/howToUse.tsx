@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HelpCircle, X } from "lucide-react";
+import { GrayTitle } from "./reusable";
 
 export default function HowToUse() {
   const [open, setOpen] = useState(false);
@@ -10,10 +11,10 @@ export default function HowToUse() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-purple-600 px-4 py-3 text-white shadow-lg transition hover:bg-purple-700"
+        className="fixed bottom-22 right-6 z-50 flex items-center gap-2 rounded-full bg-purple-600 px-4 py-3 text-white shadow-lg transition hover:bg-purple-700"
       >
-        <HelpCircle size={18} />
-        How to Use
+        <HelpCircle size={20} />
+        Help
       </button>
 
       {open && (
@@ -22,14 +23,14 @@ export default function HowToUse() {
 
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-3xl font-bold">
-                🚀 AI Builder Guide
+                <GrayTitle>Forge Guide</GrayTitle>
               </h2>
 
               <button
                 onClick={() => setOpen(false)}
                 className="rounded-lg p-2 hover:bg-zinc-800"
               >
-                <X size={20} />
+                <X size={15} />
               </button>
             </div>
 

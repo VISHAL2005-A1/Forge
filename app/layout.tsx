@@ -35,11 +35,11 @@ export default function RootLayout({
         lang="en"
         suppressHydrationWarning
       >
-        <body className={`${lora.variable} ${dmSans.variable} fornt-sans`}>
+        <body className={`${lora.variable} ${dmSans.variable} font-sans`}>
 
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
@@ -52,3 +52,4 @@ export default function RootLayout({
      
   );
 }
+

@@ -508,11 +508,10 @@ export function CodePanel({
   }, [fileData]);
   
   const files = fileData?.files ?? PLACEHOLDER_FILES;
-  // console.log("CURRENT APP:");
-  // console.log(Object.keys(files));
+ 
   
   if ("/App.tsx" in files) {
-    // console.log(files["/App.tsx"]);
+  
   }
   
   const dependencies = {

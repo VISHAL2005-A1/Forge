@@ -20,6 +20,7 @@ export default async function WorkspacePage({
 
   return (<div>
 
+    <HowToUse></HowToUse>
     <WorkspaceClient
       initialPrompt={prompt ?? null}
       workspace={workspace}
@@ -27,7 +28,6 @@ export default async function WorkspacePage({
       userId={user.id}
       userPlan={user.plan}
       />
-    <HowToUse></HowToUse>
       </div>
   );
 }

@@ -19,9 +19,9 @@ export const aj = arcjet({
     // Adjust refillRate / capacity for your plans as needed.
     tokenBucket({
       mode: "LIVE",
-      refillRate: 5, // refill 5 tokens every...
+      refillRate: 2, // refill 5 tokens every...
       interval: 60, // ...60 seconds
-      capacity: 5, // max burst = 5
+      capacity: 2, // max burst = 5
     }),
 
     // ── Prompt injection detection ─────────────────────────────────────────

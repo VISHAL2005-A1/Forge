@@ -461,12 +461,12 @@ export default function Home() {
         <div className="mx-auto max-w-5xl">
           <PricingTable
             checkoutProps={{
-              appearance: {
-                elements: {
-                  drawerRoot: { zIndex: 2000 },
-                },
-              },
-            }}
+             appearance: {
+               elements: {
+                 drawerRoot: { zIndex: 2000 },
+               },
+             },
+           }}
           />
         </div>
       </section>

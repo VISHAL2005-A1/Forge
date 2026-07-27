@@ -169,16 +169,17 @@ function buildRouter(): AIFallbackRouter {
   const cooldownMs = Number(process.env.AI_COOLDOWN_MS ?? DEFAULT_COOLDOWN_MS);
   const verbose = process.env.NODE_ENV === "development";
 
+  console.log(process.env.MISTRAL_API_KEY?.slice(0, 6));
   return new AIFallbackRouter(
     [
       
-      {
-        name: "huggingface",
-        apiKey: process.env.HUGGINGFACE_API_KEY ?? "",
-        model: process.env.HUGGINGFACE_MODEL
-        ?? "Qwen/Qwen2.5-Coder-32B-Instruct",
-        baseUrl: "https://api-inference.huggingface.co/models",
-      },
+      // {
+      //   name: "huggingface",
+      //   apiKey: process.env.HUGGINGFACE_API_KEY ?? "",
+      //   model: process.env.HUGGINGFACE_MODEL
+      //   ?? "Qwen/Qwen2.5-Coder-32B-Instruct",
+      //   baseUrl: "https://api-inference.huggingface.co/models",
+      // },
       // ── 2nd choice: Gemini ────────────────────────────────
       // Most generous free tier: 1,500 req/day, 1M tokens/day
       {

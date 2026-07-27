@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 
+export const dynamic = 'force-dynamic';
+
 const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
@@ -52,4 +54,3 @@ export default function RootLayout({
      
   );
 }
-

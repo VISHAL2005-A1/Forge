@@ -14,11 +14,13 @@ export function validateResponse(content: string) {
         throw new InvalidJSONError("No JSON found");
     }
 
-    if (!content.trim().endsWith("}")) {
-        throw new TruncatedResponseError(
-            "Response truncated"
-        );
-    }
+    // NOTE: we intentionally do NOT throw on `!content.trim().endsWith("}")`
+    // here anymore. That check was a false-positive magnet — trailing prose
+    // after otherwise-valid JSON (common with instruct-tuned models) would
+    // trip it even though extractJSON()/parseJSON() below can recover the
+    // content fine. Real truncation is now detected downstream in parseJSON,
+    // only after both a plain JSON.parse and a jsonrepair-assisted parse
+    // have failed.
 }
 
 export function parseJSON(content: string) {
@@ -28,9 +30,15 @@ export function parseJSON(content: string) {
         try {
             return JSON.parse(jsonrepair(content));
         } catch {
-            throw new InvalidJSONError(
-                "Invalid JSON"
-            );
+            // Both plain parse and repair-assisted parse failed.
+            // If the content also doesn't end cleanly, this is very likely
+            // genuine truncation — surface that specific, more actionable
+            // error instead of a generic "invalid JSON".
+            const trimmed = content.trim();
+            if (!trimmed.endsWith("}") && !trimmed.endsWith("```")) {
+                throw new TruncatedResponseError("Response truncated");
+            }
+            throw new InvalidJSONError("Invalid JSON");
         }
     }
 }

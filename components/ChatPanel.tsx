@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { PricingModal } from "@/components/PricingModal";
 import type { Message, StatusStep } from "@/types/workspace";
 import { createClient } from "@supabase/supabase-js";
-import { BlueTitle } from "./reusable";
+// import { BlueTitle } from "./reusable";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

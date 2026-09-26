@@ -11,7 +11,7 @@
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-Components-000000?style=flat-square)](https://ui.shadcn.com/)
 
 
-[Live Demo](https://forge-kohl-five.vercel.app/) 
+[Live Demo](https://forge-ten-kappa.vercel.app/) 
 
 </div>
 
